@@ -73,7 +73,6 @@ export default function Navbar() {
 
   const toggleMobileSubmenu = (id: string) => {
     setMobileExpanded((prev) => ({
-      ...prev,
       [id]: !prev[id],
     }));
   };
@@ -408,6 +407,14 @@ export default function Navbar() {
         </div>
       </div>
 
+      <button
+        type="button"
+        className={"mobile-nav-backdrop xl:hidden fixed inset-x-0 bottom-0 top-16 z-30 " + (mobileMenuOpen ? "is-open" : "")}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-label="Close navigation menu"
+        tabIndex={mobileMenuOpen ? 0 : -1}
+      />
+
       {/* Mobile Navigation Drawer */}
       <div
         id="mobile-navigation"
@@ -451,7 +458,10 @@ export default function Navbar() {
           const isExpanded = Boolean(mobileExpanded[item.id]);
 
           return (
-            <div key={item.id} className="mobile-nav-category border-b border-slate-200">
+            <div
+              key={item.id}
+              className={"mobile-nav-category border-b border-slate-200 " + (isExpanded ? "is-expanded" : "")}
+            >
               <button
                 type="button"
                 onClick={() => toggleMobileSubmenu(item.id)}

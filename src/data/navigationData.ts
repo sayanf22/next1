@@ -123,8 +123,8 @@ export const navigationData: NavItemData[] = [
   {
     id: "services",
     label: "Services",
-    accentColor: "#e85870",
-    accentLightBg: "#fff1f4",
+    accentColor: "#1769aa",
+    accentLightBg: "#eff6ff",
     items: [
       {
         title: "Career Coaching",
@@ -174,8 +174,8 @@ export const navigationData: NavItemData[] = [
   {
     id: "working-professionals",
     label: "Working Professionals",
-    accentColor: "#e85870",
-    accentLightBg: "#fff1f4",
+    accentColor: "#0f766e",
+    accentLightBg: "#f0fdfa",
     items: [
       {
         title: "Resume Writing",
@@ -217,8 +217,8 @@ export const navigationData: NavItemData[] = [
   {
     id: "institutions",
     label: "Institutions",
-    accentColor: "#e85870",
-    accentLightBg: "#fff1f4",
+    accentColor: "#7356bf",
+    accentLightBg: "#f5f3ff",
     items: [
       {
         title: "Hire Us",

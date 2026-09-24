@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Lexend } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const lexend = Lexend({
-  variable: "--font-lexend",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
   display: "swap",
 });
+
 
 export const viewport: Viewport = {
   themeColor: "#0f172a",
@@ -66,10 +67,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${lexend.variable}`}
+      className={`scroll-smooth ${openSans.variable}`}
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-screen flex flex-col bg-white text-slate-800 font-medium antialiased selection:bg-blue-100 selection:text-blue-900">
+      <body className="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
         <Navbar />
         <main className="flex-1">{children}</main>
       </body>
