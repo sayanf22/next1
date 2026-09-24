@@ -5,6 +5,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { navigationData, type SubItem } from "@/data/navigationData";
 
+function MobileMenuLink({
+  item,
+  accentColor,
+  onNavigate,
+}: {
+  item: SubItem;
+  accentColor: string;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      href={item.href}
+      className="group flex min-h-16 items-center justify-between gap-3 border-b border-slate-100 px-1 py-3 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/35 last:border-b-0"
+      onClick={onNavigate}
+    >
+      <span className="min-w-0">
+        <span className="block text-sm font-semibold leading-snug text-slate-900">
+          {item.title}
+          {item.categoryTag && (
+            <span className="font-normal text-slate-500"> — {item.categoryTag}</span>
+          )}
+        </span>
+        <span className="mt-1 line-clamp-1 block text-xs leading-relaxed text-slate-500">
+          {item.description}
+        </span>
+      </span>
+      <span
+        className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold"
+        style={{ color: accentColor }}
+      >
+        <span>View details</span>
+        <svg aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </span>
+    </Link>
+  );
+}
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -469,21 +507,13 @@ export default function Navbar() {
                 aria-expanded={isExpanded}
                 aria-controls={`mobile-nav-${item.id}`}
               >
-                <span>{item.label}</span>
-                <svg
-                  className={`h-4 w-4 text-[#0056d2] transition-transform duration-200 ${
-                    isExpanded ? "rotate-180" : ""
-                  }`}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+                <span style={isExpanded ? { color: item.accentColor } : undefined}>{item.label}</span>
+                <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-500">
+                  {isExpanded ? "Close" : "Explore"}
+                  <svg className={`h-4 w-4 text-[#0056d2] transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </span>
               </button>
 
               {(item.categories || item.items) && (
@@ -493,80 +523,38 @@ export default function Navbar() {
                   inert={!isExpanded}
                   className={`mobile-nav-accordion ${isExpanded ? "is-open" : ""}`}
                 >
-                  <div className="mobile-nav-accordion-inner ml-1 mt-1 space-y-5 border-l border-rose-100 py-2 pl-4">
+                  <div className="mobile-nav-accordion-inner space-y-5 py-2">
                     {item.categories?.map((cat) => (
-                      <div key={cat.categoryTitle} className="space-y-2">
-                        <p
-                          className="text-xs font-bold uppercase tracking-wider"
-                          style={{ color: item.accentColor }}
-                        >
-                          {cat.categoryTitle}
-                        </p>
-                        <div className="space-y-2">
+                      <section key={cat.categoryTitle} className="space-y-1">
+                        <div className="mb-1 flex items-center justify-between gap-3">
+                          <p className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: item.accentColor }}>
+                            {cat.categoryTitle}
+                          </p>
+                          {cat.badge && <span className="text-[11px] font-medium text-slate-400">{cat.badge}</span>}
+                        </div>
+                        <div>
                           {cat.items.map((sub) => (
-                            <Link
-                              key={sub.title}
-                              href={sub.href}
-                              className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              <span className="font-semibold text-slate-900 block">
-                                {sub.title} {sub.categoryTag ? `— ${sub.categoryTag}` : ""}
-                              </span>
-                              <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
-                                {sub.description}
-                              </span>
-                            </Link>
+                            <MobileMenuLink key={sub.title} item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
                           ))}
                         </div>
-                      </div>
+                      </section>
                     ))}
                     {item.items?.map((sub) => (
-                      <div key={sub.title} className="space-y-2">
+                      <section key={sub.title} className="space-y-1">
                         {sub.children?.length ? (
-                          <div>
-                            <p
-                              className="text-sm font-bold"
-                              style={{ color: item.accentColor }}
-                            >
-                              {sub.title}
-                            </p>
-                            <p className="mt-1 text-[11px] leading-relaxed text-slate-500">
-                              {sub.description}
-                            </p>
-                            <div className="mt-2 space-y-2 border-l-2 border-slate-200 pl-3">
+                          <>
+                            <MobileMenuLink item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
+                            <div className="ml-3 border-l border-slate-200 pl-3">
+                              <p className="py-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Workshop topics</p>
                               {sub.children.map((child) => (
-                                <Link
-                                  key={child.title}
-                                  href={child.href}
-                                  className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                >
-                                  <span className="block font-semibold text-slate-900">
-                                    {child.title}
-                                  </span>
-                                  <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
-                                    {child.description}
-                                  </span>
-                                </Link>
+                                <MobileMenuLink key={child.title} item={child} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
                               ))}
                             </div>
-                          </div>
+                          </>
                         ) : (
-                          <Link
-                            href={sub.href}
-                            className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            <span className="block font-semibold text-slate-900">
-                              {sub.title} {sub.categoryTag ? `— ${sub.categoryTag}` : ""}
-                            </span>
-                            <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
-                              {sub.description}
-                            </span>
-                          </Link>
+                          <MobileMenuLink item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
                         )}
-                      </div>
+                      </section>
                     ))}
                   </div>
                 </div>

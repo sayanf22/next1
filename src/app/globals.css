@@ -238,19 +238,12 @@
 }
 
 .mobile-nav-category {
-  border-radius: 0.75rem;
-  transition:
-    background-color 200ms ease,
-    border-color 200ms ease;
-}
-
-.mobile-nav-category.is-expanded {
-  border-color: transparent;
-  background-color: #fff7f8;
+  transition: border-color 200ms ease;
 }
 
 .mobile-nav-category-trigger {
-  border-radius: 0.75rem;
+  border-radius: 0.625rem;
+  padding-inline: 0.5rem;
   transition:
     color 180ms ease,
     background-color 180ms ease;
@@ -258,14 +251,13 @@
 
 .mobile-nav-category-trigger:hover,
 .mobile-nav-category-trigger[aria-expanded="true"] {
-  color: #c63d57;
+  background-color: #f8fafc;
 }
 
 .mobile-nav-category-trigger:focus-visible {
-  outline: 2px solid rgb(232 88 112 / 38%);
+  outline: 2px solid rgb(0 86 210 / 35%);
   outline-offset: -2px;
 }
-
 .mobile-nav-accordion {
   display: grid;
   grid-template-rows: 0fr;
