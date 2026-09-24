@@ -107,16 +107,19 @@ export default function Home() {
               </article>
             ))}
           </div>
-
-          <div className="mt-7 grid grid-cols-2 gap-x-2 gap-y-5 border-t border-sky-400/60 pt-5 sm:mt-8 sm:grid-cols-4 sm:gap-4">
-            {impactStats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-2xl font-bold tracking-tight text-[#07699b] sm:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-[11px] font-medium text-slate-700 sm:text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
+      </section>
+
+      <section aria-labelledby="impact-stats-title" className="mx-auto w-full max-w-md px-5 pb-10 sm:px-8 sm:pb-12">
+        <h2 id="impact-stats-title" className="sr-only">Our impact</h2>
+        <ul className="divide-y divide-slate-200/80">
+          {impactStats.map((stat) => (
+            <li key={stat.label} className="py-5 text-center">
+              <p className="text-3xl font-bold tracking-tight text-[#07699b] sm:text-4xl">{stat.value}</p>
+              <p className="mt-1 text-sm font-medium text-slate-700">{stat.label}</p>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );
