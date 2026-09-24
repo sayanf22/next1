@@ -70,7 +70,7 @@ export default function Home() {
 
         <div className="mx-auto mt-8 max-w-6xl sm:mt-10 lg:mt-12">
           <Image
-            src="/images/next1-student-guidance-hero.png"
+            src="/images/next1-student-guidance-hero.webp"
             alt="Students and a career advisor preparing for their next academic and professional steps"
             width={2171}
             height={724}

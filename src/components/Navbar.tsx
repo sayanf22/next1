@@ -181,13 +181,13 @@ export default function Navbar() {
               onClick={closeDropdown}
               onFocus={closeDropdown}
             >
-              <div className="relative h-12 w-36 sm:h-14 sm:w-48 xl:h-14 xl:w-56">
+              <div className="relative h-14 w-44 sm:h-16 sm:w-56 xl:h-16 xl:w-64">
                 <Image
                   src="/logo/custom-vertical-no-tagline-transparent-3000x1000.png"
                   alt="Next 1 Education - Education | Career Counseling | Skill Development"
                   fill
-                  sizes="(max-width: 639px) 144px, (max-width: 1279px) 192px, 224px"
-                  className="object-contain object-left scale-105 origin-left"
+                  sizes="(max-width: 639px) 176px, (max-width: 1279px) 224px, 256px"
+                  className="object-contain object-left"
                   priority
                 />
               </div>
