@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary-blue: #0056d2;
+    --primary-hover: #0043a8;
+    --navy-dark: #0a192f;
+    --navy-deep: #050d1a;
+    --accent-red: #e85870;
+    --text-heading: #0f172a;
+    --text-body: #475569;
+    --text-muted: #64748b;
+    --border-light: #e2e8f0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-lexend), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  body {
+    color: var(--text-heading);
+    background-color: #ffffff;
+    font-family: var(--font-lexend), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Audience tabs use brand colors with a smooth, saturated active state. */
+.nav-category-trigger {
+  color: #475569;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-category-trigger:hover,
+.nav-category-trigger:focus-visible:not(.is-active) {
+  color: var(--nav-accent);
+  background-color: color-mix(in srgb, var(--nav-accent) 11%, white);
+  border-color: color-mix(in srgb, var(--nav-accent) 24%, white);
+  transform: translateY(-1px);
+}
+
+.nav-category-trigger.is-active {
+  color: white;
+  background-color: var(--nav-accent);
+  border-color: var(--nav-accent);
+}
+
+.nav-category-trigger:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--nav-accent) 28%, transparent);
+  outline-offset: 3px;
+}
+
+.mega-menu-card {
+  border: 1px solid rgb(226 232 240 / 85%);
+  background: linear-gradient(160deg, #fff, #fcfdff);
+  transition:
+    border-color 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mega-menu-card:hover {
+  border-color: color-mix(in srgb, var(--nav-accent) 36%, white);
+  transform: translateY(-2px);
+}
+
+.mega-menu-item-title {
+  transition: color 180ms ease;
+}
+
+.mega-menu-item:hover .mega-menu-item-title {
+  color: var(--nav-accent);
+}
+
+.mega-menu-accent-text {
+  color: var(--nav-accent);
+}
+
+.mega-menu-child-link {
+  border-left: 2px solid #e2e8f0;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.mega-menu-child-link:hover {
+  border-color: var(--nav-accent);
+  background-color: color-mix(in srgb, var(--nav-accent) 6%, white);
+}
+
+.nav-talk-cta {
+  width: 2.75rem;
+  background: linear-gradient(120deg, #0066f5, #0052cc);
+  transition:
+    width 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.nav-talk-cta:hover,
+.nav-talk-cta:focus-visible {
+  width: 9.25rem;
+  background: linear-gradient(120deg, #005bdc, #0043a8);
+  transform: translateY(-1px);
+}
+
+.nav-talk-cta:focus-visible {
+  outline: 3px solid rgb(0 102 245 / 28%);
+  outline-offset: 3px;
+}
+
+.nav-talk-label {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  transition:
+    max-width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 160ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-talk-cta:hover .nav-talk-label,
+.nav-talk-cta:focus-visible .nav-talk-label {
+  max-width: 5.5rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Full-width menu sits directly below the header and rounds only its attached lower edge. */
+.mega-menu-surface {
+  width: 100%;
+  overflow: hidden;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #cbd5e1;
+  border-left: 1px solid #e2e8f0;
+  border-radius: 0 0 1.25rem 1.25rem;
+  background: #fff;
+}
+
+/* Reveal the menu from the top and reverse the same motion when it closes. */
+.mega-menu-layer {
+  clip-path: inset(0 0 100% 0 round 0 0 1.25rem 1.25rem);
+  opacity: 0;
+  transform: translateY(-0.5rem) scale(0.99);
+  transform-origin: top center;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 320ms;
+}
+
+.mega-menu-layer.is-open {
+  clip-path: inset(0 0 0 0 round 0 0 1.25rem 1.25rem);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
+}
+
+/* Mobile drawer and accordions use the same quick, reversible motion. */
+.mobile-nav-drawer {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 240ms;
+}
+
+.mobile-nav-drawer.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 180ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
+}
+
+.mobile-nav-accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease;
+}
+
+.mobile-nav-accordion.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mobile-nav-accordion-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-talk-cta,
+  .nav-talk-label,
+  .mega-menu-layer,
+  .mobile-nav-drawer,
+  .mobile-nav-accordion {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+}
+
+/* Subtle cross-fade for category switching */
+@keyframes categoryCrossFade {
+  0% {
+    opacity: 0.7;
+    transform: translateY(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-category-fade {
+  animation: categoryCrossFade 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
