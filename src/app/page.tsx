@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedMetric from "@/components/AnimatedMetric";
 
 const guidanceSteps = [
   {
@@ -29,10 +30,10 @@ const guidanceSteps = [
 ];
 
 const impactStats = [
-  { value: "250+", label: "Students guided" },
-  { value: "20", label: "School partners" },
-  { value: "8", label: "College partners" },
-  { value: "6", label: "Career mentors" },
+  { value: 1000, suffix: "+", label: "Students guided" },
+  { value: 20, label: "School partners" },
+  { value: 8, label: "College partners" },
+  { value: 6, label: "Career mentors" },
 ];
 
 export default function Home() {
@@ -49,11 +50,11 @@ export default function Home() {
 
         <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
-            href="/lets-talk?source=hero"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#0056d2] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0043a8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/40 focus-visible:ring-offset-2"
+            href="/lets-talk"
+            className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#0056d2] px-5 text-sm font-semibold text-white transition-colors duration-300 ease-out hover:bg-black focus-visible:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/40 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Talk to an advisor
-            <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg aria-hidden="true" className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 17 17 7M8 7h9v9" />
             </svg>
           </Link>
@@ -113,11 +114,14 @@ export default function Home() {
       <section aria-labelledby="impact-stats-title" className="mx-auto w-full max-w-md px-5 pb-10 sm:px-8 sm:pb-12">
         <h2 id="impact-stats-title" className="sr-only">Our impact</h2>
         <ul className="divide-y divide-slate-200/80">
-          {impactStats.map((stat) => (
-            <li key={stat.label} className="py-5 text-center">
-              <p className="text-3xl font-bold tracking-tight text-[#07699b] sm:text-4xl">{stat.value}</p>
-              <p className="mt-1 text-sm font-medium text-slate-700">{stat.label}</p>
-            </li>
+          {impactStats.map((stat, index) => (
+            <AnimatedMetric
+              key={stat.label}
+              value={stat.value}
+              suffix={stat.suffix}
+              label={stat.label}
+              delay={index * 140}
+            />
           ))}
         </ul>
       </section>
