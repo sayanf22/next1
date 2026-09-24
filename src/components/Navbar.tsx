@@ -7,17 +7,15 @@ import { navigationData, type SubItem } from "@/data/navigationData";
 
 function MobileMenuLink({
   item,
-  accentColor,
   onNavigate,
 }: {
   item: SubItem;
-  accentColor: string;
   onNavigate: () => void;
 }) {
   return (
     <Link
       href={item.href}
-      className="group flex min-h-16 items-center justify-between gap-3 border-b border-slate-100 px-1 py-3 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/35 last:border-b-0"
+      className="group flex min-h-16 items-center justify-between gap-4 border-b border-slate-100 px-2 py-4 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/35 last:border-b-0"
       onClick={onNavigate}
     >
       <span className="min-w-0">
@@ -31,12 +29,18 @@ function MobileMenuLink({
           {item.description}
         </span>
       </span>
-      <span
-        className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold"
-        style={{ color: accentColor }}
-      >
+      <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#0056d2]">
         <span>View details</span>
-        <svg aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M5 12h14M13 6l6 6-6 6" />
         </svg>
       </span>
@@ -481,7 +485,7 @@ export default function Navbar() {
                 {contactPhone && (
                   <a
                     href={"tel:" + contactPhone.replace(/\s+/g, "")}
-                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#e85870]/40 hover:bg-rose-50 hover:text-[#c63d57] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85870]/40"
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/40"
                   >
                     <svg aria-hidden="true" className="h-4 w-4 text-[#0056d2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -507,7 +511,7 @@ export default function Navbar() {
                 aria-expanded={isExpanded}
                 aria-controls={`mobile-nav-${item.id}`}
               >
-                <span style={isExpanded ? { color: item.accentColor } : undefined}>{item.label}</span>
+                <span>{item.label}</span>
                 <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-500">
                   {isExpanded ? "Close" : "Explore"}
                   <svg className={`h-4 w-4 text-[#0056d2] transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -523,18 +527,18 @@ export default function Navbar() {
                   inert={!isExpanded}
                   className={`mobile-nav-accordion ${isExpanded ? "is-open" : ""}`}
                 >
-                  <div className="mobile-nav-accordion-inner space-y-5 py-2">
+                  <div className="mobile-nav-accordion-inner space-y-7 py-3">
                     {item.categories?.map((cat) => (
                       <section key={cat.categoryTitle} className="space-y-1">
-                        <div className="mb-1 flex items-center justify-between gap-3">
-                          <p className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: item.accentColor }}>
+                        <div className="mb-2 flex items-center justify-between gap-3">
+                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-500">
                             {cat.categoryTitle}
                           </p>
                           {cat.badge && <span className="text-[11px] font-medium text-slate-400">{cat.badge}</span>}
                         </div>
                         <div>
                           {cat.items.map((sub) => (
-                            <MobileMenuLink key={sub.title} item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
+                            <MobileMenuLink key={sub.title} item={sub} onNavigate={() => setMobileMenuOpen(false)} />
                           ))}
                         </div>
                       </section>
@@ -543,16 +547,16 @@ export default function Navbar() {
                       <section key={sub.title} className="space-y-1">
                         {sub.children?.length ? (
                           <>
-                            <MobileMenuLink item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
+                            <MobileMenuLink item={sub} onNavigate={() => setMobileMenuOpen(false)} />
                             <div className="ml-3 border-l border-slate-200 pl-3">
                               <p className="py-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Workshop topics</p>
                               {sub.children.map((child) => (
-                                <MobileMenuLink key={child.title} item={child} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
+                                <MobileMenuLink key={child.title} item={child} onNavigate={() => setMobileMenuOpen(false)} />
                               ))}
                             </div>
                           </>
                         ) : (
-                          <MobileMenuLink item={sub} accentColor={item.accentColor} onNavigate={() => setMobileMenuOpen(false)} />
+                          <MobileMenuLink item={sub} onNavigate={() => setMobileMenuOpen(false)} />
                         )}
                       </section>
                     ))}
