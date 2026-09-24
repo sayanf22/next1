@@ -91,20 +91,25 @@ export default function Home() {
             A clearer path, step by step
           </h2>
 
-          <div className="relative mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-9 sm:gap-x-8 lg:grid-cols-4 lg:gap-5">
+          <div className="relative mt-7 grid grid-cols-1 gap-y-6 sm:mt-9 lg:grid-cols-4 lg:gap-5">
+            <div aria-hidden="true" className="pointer-events-none absolute bottom-6 left-6 top-6 border-l border-dashed border-[#6f91a5] lg:hidden" />
             <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-14 w-[75%] lg:block" viewBox="0 0 900 80" preserveAspectRatio="none">
               <path d="M0 40 C110 40 190 44 300 44 S500 36 600 36 S790 40 900 40" fill="none" stroke="#6f91a5" strokeWidth="1.5" strokeDasharray="5 7" />
             </svg>
 
             {guidanceSteps.map((step) => (
-              <article key={step.title} className="relative flex flex-col items-center text-center">
-                <span className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full sm:h-14 sm:w-14 ${step.color}`}>
+              <article key={step.title} className="relative flex items-start gap-4 text-left lg:flex-col lg:items-center lg:text-center">
+                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${step.color}`}>
                   <svg aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {step.icon}
                   </svg>
                 </span>
-                <h3 className="mt-3 text-sm font-bold leading-snug text-slate-900 sm:text-base">{step.title}</h3>
-                <p className="mt-1 max-w-[15rem] text-xs leading-relaxed text-slate-600 sm:text-sm">{step.description}</p>
+                <div className="min-w-0 lg:flex lg:flex-col lg:items-center">
+                  <h3 className="text-sm font-bold leading-snug text-slate-900 lg:mt-3 sm:text-base">{step.title}</h3>
+                  <p className="mt-1 max-w-none text-xs leading-relaxed text-slate-600 sm:text-sm lg:max-w-[15rem]">
+                    {step.description}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
