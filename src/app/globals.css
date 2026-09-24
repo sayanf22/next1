@@ -203,6 +203,17 @@
     visibility 0s;
 }
 
+.mobile-nav-category-trigger:hover,
+.mobile-nav-category-trigger[aria-expanded="true"] {
+  color: #c63d57;
+}
+
+.mobile-nav-category-trigger:focus-visible {
+  border-radius: 0.375rem;
+  outline: 2px solid rgb(232 88 112 / 38%);
+  outline-offset: -2px;
+}
+
 .mobile-nav-accordion {
   display: grid;
   grid-template-rows: 0fr;

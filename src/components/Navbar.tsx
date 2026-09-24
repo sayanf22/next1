@@ -82,6 +82,10 @@ export default function Navbar() {
   const currentItemData =
     navigationData.find((item) => item.id === activeMenu) ||
     navigationData[0];
+  const contactPhone = navigationData.find((item) => item.sideContact)?.sideContact?.phone;
+  const mobileNavigationItems = [...navigationData].sort(
+    (left, right) => Number(Boolean(right.isCta)) - Number(Boolean(left.isCta)),
+  );
 
   const renderDesktopItem = (subItem: SubItem, asCard = false) => (
     <div
@@ -167,10 +171,10 @@ export default function Navbar() {
         }
       }}
     >
-      <div className="max-w-[1750px] mx-auto px-4 sm:px-8 lg:px-4 xl:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="mx-auto max-w-[1750px] px-4 sm:px-8 xl:px-8">
+        <div className="grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
           {/* Prominent High-Visibility Brand Logo on Left */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex min-w-0 items-center">
             <Link
               href="/"
               className="flex items-center group transition-opacity hover:opacity-95"
@@ -178,12 +182,12 @@ export default function Navbar() {
               onClick={closeDropdown}
               onFocus={closeDropdown}
             >
-              <div className="relative h-12 w-36 sm:h-16 sm:w-80 lg:w-56 xl:w-80 2xl:w-[440px]">
+              <div className="relative h-12 w-36 sm:h-14 sm:w-48 xl:h-14 xl:w-56">
                 <Image
                   src="/logo/custom-vertical-no-tagline-transparent-3000x1000.png"
                   alt="Next 1 Education - Education | Career Counseling | Skill Development"
                   fill
-                  sizes="(max-width: 639px) 144px, (max-width: 1023px) 320px, (max-width: 1279px) 224px, (max-width: 1535px) 320px, 440px"
+                  sizes="(max-width: 639px) 144px, (max-width: 1279px) 192px, 224px"
                   className="object-contain object-left scale-105 origin-left"
                   priority
                 />
@@ -191,47 +195,17 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation Items */}
+          {/* Center the desktop links between the brand and the contact action. */}
           <nav
-            className="hidden lg:flex items-center space-x-1.5 xl:space-x-3"
+            className="hidden items-center justify-self-center space-x-1.5 xl:flex 2xl:space-x-3"
             role="navigation"
             aria-label="Main Navigation"
             onMouseLeave={handleMouseLeave}
           >
-            {navigationData.map((item) => {
+            {navigationData.filter((item) => !item.isCta).map((item) => {
               const isItemActive = activeMenu === item.id;
               const hasDropdown = Boolean(item.categories || item.items);
 
-              // 5th Nav Item: "Let's Talk" -> Modern, sleek CTA pill with integrated dialer icon & smooth micro-interactions
-              if (item.isCta) {
-                return (
-                  <div key={item.id} className="ml-3 xl:ml-5">
-                    <Link
-                      href={item.href || "/lets-talk"}
-                      className="nav-talk-cta group relative inline-flex h-11 w-11 items-center gap-2 overflow-hidden rounded-full px-3 text-sm font-semibold text-white active:translate-y-0 cursor-pointer"
-                      aria-label="Let's Talk - Connect with our Career Counselors"
-                    >
-                      <svg
-                        className="h-4 w-4 shrink-0 text-white/95 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                      </svg>
-
-                      <span className="nav-talk-label whitespace-nowrap tracking-wide">
-                        {item.label}
-                      </span>
-                    </Link>
-                  </div>
-                );
-              }
-
-              // Nav Category Buttons with unique active colors & clean SVG chevrons
               return (
                 <div
                   key={item.id}
@@ -243,9 +217,7 @@ export default function Navbar() {
                     onClick={() => setActiveMenu(item.id)}
                     onFocus={() => handleMouseEnter(item.id)}
                     style={{ "--nav-accent": item.accentColor } as React.CSSProperties}
-                    className={`nav-category-trigger inline-flex items-center gap-1.5 rounded-[4px] px-3 py-1 text-sm font-semibold cursor-pointer ${
-                      isItemActive ? "is-active" : ""
-                    }`}
+                    className={"nav-category-trigger inline-flex items-center gap-1.5 rounded-[4px] px-3 py-1 text-sm font-semibold cursor-pointer " + (isItemActive ? "is-active" : "")}
                     aria-expanded={isItemActive}
                     aria-haspopup="true"
                     aria-controls="mega-menu-panel"
@@ -253,15 +225,14 @@ export default function Navbar() {
                     <span>{item.label}</span>
                     {hasDropdown && (
                       <svg
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          isItemActive ? "rotate-180 text-white" : "text-slate-400"
-                        }`}
+                        className={"w-3.5 h-3.5 transition-transform duration-300 " + (isItemActive ? "rotate-180 text-white" : "text-slate-400")}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        aria-hidden="true"
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
@@ -272,35 +243,50 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Mobile Toggle & CTA */}
-          <div className="lg:hidden flex items-center gap-3">
-            <Link
-              href="/lets-talk"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-[#0066f5] hover:bg-[#0052cc] transition-colors"
-              aria-label="Let's Talk"
-            >
-              <svg
-                className="w-3.5 h-3.5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          {/* Contact action sits at the far right and expands on hover or keyboard focus. */}
+          <div className="hidden items-center justify-self-end xl:flex">
+            {navigationData.filter((item) => item.isCta).map((item) => (
+              <Link
+                key={item.id}
+                href={item.href || "/lets-talk"}
+                className="nav-talk-cta group relative inline-flex h-11 w-11 items-center gap-2 overflow-hidden rounded-full px-3 text-sm font-semibold text-white active:translate-y-0"
+                aria-label="Let's Talk - Connect with our Career Counselors"
               >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              <span>Let&apos;s Talk</span>
-            </Link>
+                <svg
+                  className="h-4 w-4 shrink-0 text-white/95 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span className="nav-talk-label whitespace-nowrap tracking-wide">
+                  {item.label}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* On touch layouts, keep the header focused on the brand and a clear menu control. */}
+          <div className="flex items-center justify-self-end xl:hidden">
             <button
               type="button"
               onClick={() => setMobileMenuOpen((open) => !open)}
-              className="p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none"
-              aria-label="Toggle menu"
+              className="relative inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-700 transition-colors hover:bg-rose-50 hover:text-[#e85870] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85870]/40"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
             >
-              {mobileMenuOpen ? "✕" : "☰"}
+              <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
+              <span aria-hidden="true" className="relative flex h-[18px] w-[22px] flex-col justify-between">
+                <span className={"h-0.5 w-full rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none " + (mobileMenuOpen ? "translate-y-2 rotate-45" : "")} />
+                <span className={"h-0.5 w-full rounded-full bg-current transition-opacity duration-150 motion-reduce:transition-none " + (mobileMenuOpen ? "opacity-0" : "opacity-100")} />
+                <span className={"h-0.5 w-full rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none " + (mobileMenuOpen ? "-translate-y-2 -rotate-45" : "")} />
+              </span>
             </button>
           </div>
         </div>
@@ -427,32 +413,37 @@ export default function Navbar() {
         id="mobile-navigation"
         aria-hidden={!mobileMenuOpen}
         inert={!mobileMenuOpen}
-        className={`mobile-nav-drawer lg:hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-slate-200 bg-white p-6 space-y-4 ${
+        className={`mobile-nav-drawer xl:hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-slate-200 bg-white px-6 pb-8 pt-3 sm:px-8 ${
           mobileMenuOpen ? "is-open" : ""
         }`}
       >
-        {navigationData.map((item) => {
+        <div className="mobile-nav-content mx-auto w-full max-w-2xl">
+          <nav aria-label="Mobile Navigation">
+        {mobileNavigationItems.map((item) => {
           if (item.isCta) {
             return (
-              <div key={item.id} className="pt-4 border-t border-slate-100">
+              <div key={item.id} className="mobile-nav-actions flex flex-row items-stretch gap-3 border-b border-slate-200 py-5">
                 <Link
                   href={item.href || "/lets-talk"}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-lg text-center font-bold text-white bg-[#0066f5] text-sm"
+                  className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-[#0056d2] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0043a8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/40"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <svg
-                    className="w-4 h-4 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  <span>{item.label}</span>
+                  <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17 17 7M8 7h9v9" />
                   </svg>
-                  <span>Let&apos;s Talk</span>
                 </Link>
+                {contactPhone && (
+                  <a
+                    href={"tel:" + contactPhone.replace(/\s+/g, "")}
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#e85870]/40 hover:bg-rose-50 hover:text-[#c63d57] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85870]/40"
+                  >
+                    <svg aria-hidden="true" className="h-4 w-4 text-[#0056d2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    <span>Call us</span>
+                  </a>
+                )}
               </div>
             );
           }
@@ -460,17 +451,17 @@ export default function Navbar() {
           const isExpanded = Boolean(mobileExpanded[item.id]);
 
           return (
-            <div key={item.id} className="border-b border-slate-100 pb-3">
+            <div key={item.id} className="mobile-nav-category border-b border-slate-200">
               <button
                 type="button"
                 onClick={() => toggleMobileSubmenu(item.id)}
-                className="w-full flex items-center justify-between py-2 text-base font-bold text-slate-900"
+                className="mobile-nav-category-trigger flex min-h-14 w-full items-center justify-between py-4 text-[15px] font-semibold text-slate-900 transition-colors sm:text-base"
                 aria-expanded={isExpanded}
                 aria-controls={`mobile-nav-${item.id}`}
               >
                 <span>{item.label}</span>
                 <svg
-                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                  className={`h-4 w-4 text-[#0056d2] transition-transform duration-200 ${
                     isExpanded ? "rotate-180" : ""
                   }`}
                   viewBox="0 0 24 24"
@@ -492,7 +483,7 @@ export default function Navbar() {
                   inert={!isExpanded}
                   className={`mobile-nav-accordion ${isExpanded ? "is-open" : ""}`}
                 >
-                  <div className="mobile-nav-accordion-inner mt-3 pl-3 space-y-4 border-l-2 border-slate-200">
+                  <div className="mobile-nav-accordion-inner ml-1 mt-1 space-y-5 border-l border-rose-100 py-2 pl-4">
                     {item.categories?.map((cat) => (
                       <div key={cat.categoryTitle} className="space-y-2">
                         <p
@@ -506,13 +497,13 @@ export default function Navbar() {
                             <Link
                               key={sub.title}
                               href={sub.href}
-                              className="block py-1 text-xs text-slate-700 hover:text-slate-900"
+                              className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               <span className="font-semibold text-slate-900 block">
                                 {sub.title} {sub.categoryTag ? `— ${sub.categoryTag}` : ""}
                               </span>
-                              <span className="text-[11px] text-slate-500 line-clamp-1">
+                              <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
                                 {sub.description}
                               </span>
                             </Link>
@@ -538,13 +529,13 @@ export default function Navbar() {
                                 <Link
                                   key={child.title}
                                   href={child.href}
-                                  className="block py-1 text-xs text-slate-700 hover:text-slate-900"
+                                  className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   <span className="block font-semibold text-slate-900">
                                     {child.title}
                                   </span>
-                                  <span className="line-clamp-1 text-[11px] text-slate-500">
+                                  <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
                                     {child.description}
                                   </span>
                                 </Link>
@@ -554,13 +545,13 @@ export default function Navbar() {
                         ) : (
                           <Link
                             href={sub.href}
-                            className="block py-1 text-xs text-slate-700 hover:text-slate-900"
+                            className="block rounded-md py-2 pr-2 text-sm text-slate-700 transition-colors hover:text-[#c63d57]"
                             onClick={() => setMobileMenuOpen(false)}
                           >
                             <span className="block font-semibold text-slate-900">
                               {sub.title} {sub.categoryTag ? `— ${sub.categoryTag}` : ""}
                             </span>
-                            <span className="line-clamp-1 text-[11px] text-slate-500">
+                            <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
                               {sub.description}
                             </span>
                           </Link>
@@ -573,6 +564,8 @@ export default function Navbar() {
             </div>
           );
         })}
+          </nav>
+        </div>
       </div>
     </header>
   );
