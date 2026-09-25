@@ -1,31 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Compass,
+  GraduationCap,
+  Handshake,
+  NotebookPen,
+} from "lucide-react";
 import AnimatedMetric from "@/components/AnimatedMetric";
 
 const guidanceSteps = [
   {
     title: "Explore careers",
     description: "Find paths that fit your strengths.",
-    color: "bg-emerald-100 text-emerald-800",
-    icon: <><path d="M12 3a7 7 0 0 0-7 7v2a3 3 0 0 0 3 3h1v-5H8a4 4 0 0 1 8 0h-1v5h1a3 3 0 0 0 3-3v-2a7 7 0 0 0-7-7Z" /><path d="M9 19h6" /></>,
+    color: "bg-emerald-100 text-emerald-700",
+    icon: <Compass aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
   },
   {
     title: "Make a plan",
     description: "Choose subjects, courses, and goals.",
-    color: "bg-amber-100 text-amber-800",
-    icon: <><path d="M6 3h9l3 3v15H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></>,
+    color: "bg-amber-100 text-amber-700",
+    icon: <NotebookPen aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
   },
   {
     title: "Talk to a mentor",
     description: "Get help with important decisions.",
-    color: "bg-rose-100 text-rose-800",
-    icon: <><path d="M16 20v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1" /><circle cx="10" cy="7" r="4" /><path d="M20 20v-1a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></>,
+    color: "bg-rose-100 text-rose-700",
+    icon: <Handshake aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
   },
   {
     title: "Move forward",
     description: "Prepare for college, skills, and work.",
-    color: "bg-indigo-100 text-indigo-800",
-    icon: <><path d="M4 19V5M4 19h16" /><path d="m7 15 4-4 3 2 5-6" /><path d="M15 7h4v4" /></>,
+    color: "bg-indigo-100 text-indigo-700",
+    icon: <GraduationCap aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
   },
 ];
 
@@ -84,20 +90,20 @@ export default function Home() {
 
       <section
         aria-labelledby="guidance-steps-title"
-        className="mx-0 mt-0 mb-8 w-full overflow-hidden rounded-[28px] bg-[#c9f0ff] px-5 py-8 sm:mb-10 sm:px-8 sm:py-10 lg:px-12"
+        className="mx-0 mt-0 mb-8 w-full overflow-hidden rounded-[28px] border border-sky-100 bg-[#eefaff] px-5 py-10 sm:mb-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-5xl">
           <h2 id="guidance-steps-title" className="text-center text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             A clearer path, step by step
           </h2>
 
-          <div className="relative mt-7 grid grid-cols-1 gap-y-6 sm:mt-9 lg:grid-cols-4 lg:gap-5">
-            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-20 w-[75%] lg:block" viewBox="0 0 900 80" preserveAspectRatio="none">
-              <path d="M0 28 C100 28 200 52 300 52 S500 28 600 28 S800 52 900 52" fill="none" stroke="#6f91a5" strokeWidth="1.5" strokeDasharray="5 7" strokeLinecap="round" />
+          <div className="relative mt-9 grid grid-cols-1 gap-y-6 sm:mt-10 lg:grid-cols-4 lg:gap-0">
+            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-[5.5rem] w-[75%] lg:block" viewBox="0 0 900 88" preserveAspectRatio="none">
+              <path d="M0 28 C100 28 200 56 300 56 S500 28 600 28 S800 56 900 56" fill="none" stroke="#7c96a8" strokeWidth="1.5" strokeDasharray="4 6" strokeLinecap="round" />
             </svg>
 
             {guidanceSteps.map((step, index) => (
-              <article key={step.title} className="relative flex items-start gap-4 text-left lg:flex-col lg:items-center lg:text-center">
+              <article key={step.title} className="relative grid min-h-12 grid-cols-[3rem_minmax(0,1fr)] items-start gap-4 text-left lg:flex lg:min-h-0 lg:flex-col lg:items-center lg:text-center">
                 {index < guidanceSteps.length - 1 && (
                   <svg
                     aria-hidden="true"
@@ -108,21 +114,19 @@ export default function Home() {
                     <path
                       d="M24 0 C24 25 36 25 24 50 S12 75 24 100"
                       fill="none"
-                      stroke="#6f91a5"
+                      stroke="#7c96a8"
                       strokeWidth="1.5"
                       strokeDasharray="4 5"
                       strokeLinecap="round"
                     />
                   </svg>
                 )}
-                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${index % 2 === 1 ? "lg:mt-6" : ""} ${step.color}`}>
-                  <svg aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    {step.icon}
-                  </svg>
+                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${index % 2 === 1 ? "lg:mt-7" : ""} ${step.color}`}>
+                  {step.icon}
                 </span>
-                <div className="min-w-0 lg:flex lg:flex-col lg:items-center">
-                  <h3 className="text-sm font-bold leading-snug text-slate-900 lg:mt-3 sm:text-base">{step.title}</h3>
-                  <p className="mt-1 max-w-none text-xs leading-relaxed text-slate-600 sm:text-sm lg:max-w-[15rem]">
+                <div className="min-w-0 pt-0.5 lg:flex lg:flex-col lg:items-center lg:pt-0">
+                  <h3 className="text-sm font-bold leading-snug text-slate-900 lg:mt-3 lg:text-base">{step.title}</h3>
+                  <p className="mt-1 max-w-none text-[11px] leading-relaxed text-slate-600 sm:text-xs lg:max-w-[14rem]">
                     {step.description}
                   </p>
                 </div>
