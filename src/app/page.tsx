@@ -85,10 +85,10 @@ export default function Home() {
 
       <section
         aria-labelledby="guidance-steps-title"
-        className="mx-0 mt-0 mb-8 w-full overflow-hidden rounded-[28px] border border-sky-100 bg-[#eefaff] px-5 py-10 sm:mb-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14"
+        className="mx-0 mt-0 mb-8 w-full min-w-0 max-w-[100vw] overflow-hidden rounded-[28px] border border-sky-100 bg-[#eefaff] px-5 py-10 sm:mb-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14"
       >
-        <div className="mx-auto max-w-5xl">
-          <h2 id="guidance-steps-title" className="text-center text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+        <div className="mx-auto w-full min-w-0 max-w-5xl">
+          <h2 id="guidance-steps-title" className="mx-auto w-full max-w-[18rem] text-balance text-center text-2xl font-bold tracking-tight text-slate-900 sm:max-w-none sm:text-3xl">
             A clearer path, step by step
           </h2>
 
@@ -111,7 +111,7 @@ export default function Home() {
                       fill="none"
                       stroke="#7c96a8"
                       strokeWidth="1.5"
-                      strokeDasharray="4 5"
+                      strokeDasharray="4 14"
                       strokeLinecap="round"
                     />
                   </svg>
