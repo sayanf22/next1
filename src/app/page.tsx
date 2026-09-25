@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Compass,
-  GraduationCap,
-  Handshake,
-  NotebookPen,
-} from "lucide-react";
+import { Compass, ListChecks, MessagesSquare, TrendingUp } from "lucide-react";
 import AnimatedMetric from "@/components/AnimatedMetric";
 
 const guidanceSteps = [
@@ -13,25 +8,25 @@ const guidanceSteps = [
     title: "Explore careers",
     description: "Find paths that fit your strengths.",
     color: "bg-emerald-100 text-emerald-700",
-    icon: <Compass aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
+    icon: <Compass aria-hidden="true" className="h-[1.375rem] w-[1.375rem] lg:h-6 lg:w-6" strokeWidth={2} />,
   },
   {
     title: "Make a plan",
     description: "Choose subjects, courses, and goals.",
     color: "bg-amber-100 text-amber-700",
-    icon: <NotebookPen aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
+    icon: <ListChecks aria-hidden="true" className="h-[1.375rem] w-[1.375rem] lg:h-6 lg:w-6" strokeWidth={2} />,
   },
   {
     title: "Talk to a mentor",
     description: "Get help with important decisions.",
     color: "bg-rose-100 text-rose-700",
-    icon: <Handshake aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
+    icon: <MessagesSquare aria-hidden="true" className="h-[1.375rem] w-[1.375rem] lg:h-6 lg:w-6" strokeWidth={2} />,
   },
   {
     title: "Move forward",
     description: "Prepare for college, skills, and work.",
     color: "bg-indigo-100 text-indigo-700",
-    icon: <GraduationCap aria-hidden="true" className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={1.7} />,
+    icon: <TrendingUp aria-hidden="true" className="h-[1.375rem] w-[1.375rem] lg:h-6 lg:w-6" strokeWidth={2} />,
   },
 ];
 
@@ -98,8 +93,8 @@ export default function Home() {
           </h2>
 
           <div className="relative mt-9 grid grid-cols-1 gap-y-6 sm:mt-10 lg:grid-cols-4 lg:gap-0">
-            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-[5.5rem] w-[75%] lg:block" viewBox="0 0 900 88" preserveAspectRatio="none">
-              <path d="M0 28 C100 28 200 56 300 56 S500 28 600 28 S800 56 900 56" fill="none" stroke="#7c96a8" strokeWidth="1.5" strokeDasharray="4 6" strokeLinecap="round" />
+            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-24 w-[75%] lg:block" viewBox="0 0 900 96" preserveAspectRatio="none">
+              <path d="M0 28 C100 28 200 68 300 68 S500 28 600 28 S800 68 900 68" fill="none" stroke="#7c96a8" strokeWidth="1.5" strokeDasharray="4 6" strokeLinecap="round" />
             </svg>
 
             {guidanceSteps.map((step, index) => (
@@ -112,7 +107,7 @@ export default function Home() {
                     preserveAspectRatio="none"
                   >
                     <path
-                      d="M24 0 C24 25 36 25 24 50 S12 75 24 100"
+                      d="M24 0 C24 25 44 25 24 50 S4 75 24 100"
                       fill="none"
                       stroke="#7c96a8"
                       strokeWidth="1.5"
@@ -121,7 +116,7 @@ export default function Home() {
                     />
                   </svg>
                 )}
-                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${index % 2 === 1 ? "lg:mt-7" : ""} ${step.color}`}>
+                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${index % 2 === 1 ? "lg:mt-10" : ""} ${step.color}`}>
                   {step.icon}
                 </span>
                 <div className="min-w-0 pt-0.5 lg:flex lg:flex-col lg:items-center lg:pt-0">

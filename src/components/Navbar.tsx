@@ -548,7 +548,7 @@ export default function Navbar() {
                         {sub.children?.length ? (
                           <>
                             <MobileMenuLink item={sub} onNavigate={() => setMobileMenuOpen(false)} />
-                            <div className="ml-3 border-l border-slate-200 pl-3">
+                            <div className="ml-3 pl-3">
                               <p className="py-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Workshop topics</p>
                               {sub.children.map((child) => (
                                 <MobileMenuLink key={child.title} item={child} onNavigate={() => setMobileMenuOpen(false)} />
