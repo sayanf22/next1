@@ -92,14 +92,30 @@ export default function Home() {
           </h2>
 
           <div className="relative mt-7 grid grid-cols-1 gap-y-6 sm:mt-9 lg:grid-cols-4 lg:gap-5">
-            <div aria-hidden="true" className="pointer-events-none absolute bottom-6 left-6 top-6 border-l border-dashed border-[#6f91a5] lg:hidden" />
-            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-14 w-[75%] lg:block" viewBox="0 0 900 80" preserveAspectRatio="none">
-              <path d="M0 40 C110 40 190 44 300 44 S500 36 600 36 S790 40 900 40" fill="none" stroke="#6f91a5" strokeWidth="1.5" strokeDasharray="5 7" />
+            <svg aria-hidden="true" className="pointer-events-none absolute left-[12.5%] top-0 hidden h-20 w-[75%] lg:block" viewBox="0 0 900 80" preserveAspectRatio="none">
+              <path d="M0 28 C100 28 200 52 300 52 S500 28 600 28 S800 52 900 52" fill="none" stroke="#6f91a5" strokeWidth="1.5" strokeDasharray="5 7" strokeLinecap="round" />
             </svg>
 
-            {guidanceSteps.map((step) => (
+            {guidanceSteps.map((step, index) => (
               <article key={step.title} className="relative flex items-start gap-4 text-left lg:flex-col lg:items-center lg:text-center">
-                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${step.color}`}>
+                {index < guidanceSteps.length - 1 && (
+                  <svg
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-0 top-6 bottom-[-3rem] z-0 w-12 lg:hidden"
+                    viewBox="0 0 48 100"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M24 0 C24 25 36 25 24 50 S12 75 24 100"
+                      fill="none"
+                      stroke="#6f91a5"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                )}
+                <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full lg:h-14 lg:w-14 ${index % 2 === 1 ? "lg:mt-6" : ""} ${step.color}`}>
                   <svg aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     {step.icon}
                   </svg>
