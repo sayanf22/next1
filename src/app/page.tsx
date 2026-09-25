@@ -111,7 +111,8 @@ export default function Home() {
                       fill="none"
                       stroke="#7c96a8"
                       strokeWidth="1.5"
-                      strokeDasharray="4 14"
+                      strokeDasharray="3 5"
+                      strokeDashoffset="2"
                       strokeLinecap="round"
                     />
                   </svg>
