@@ -108,7 +108,7 @@ export default function Footer() {
         <div className="mt-16 flex flex-col gap-4 border-t border-white/15 pt-8 text-[14.5px] text-white/70 md:flex-row md:items-center md:justify-between">
           <p>© {year} Next 1 Education. All rights reserved.</p>
           <p>
-            Website designed &amp; developed by{" "}
+            Built by{" "}
             <a
               href="https://whycreatives.in"
               target="_blank"
