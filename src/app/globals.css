@@ -391,14 +391,21 @@
 
 .motion .reveal {
   opacity: 0;
-  translate: 0 28px;
-  /* Includes hover properties so cards that also lift on hover keep smooth transitions. */
+  translate: 0 22px;
+  /* Includes hover props so cards that also lift on hover keep smooth transitions. */
   transition:
-    opacity 900ms var(--ease-out-soft) calc(var(--rd, 0) * 110ms),
-    translate 1100ms var(--ease-silk) calc(var(--rd, 0) * 110ms),
-    transform 420ms var(--ease-out-soft),
-    box-shadow 420ms var(--ease-out-soft),
+    opacity 620ms var(--ease-out-soft) calc(var(--rd, 0) * 80ms),
+    translate 700ms var(--ease-out-soft) calc(var(--rd, 0) * 80ms),
+    transform 400ms var(--ease-out-soft),
+    box-shadow 400ms var(--ease-out-soft),
     border-color 240ms ease;
+}
+
+/* Only hint the compositor while an element is still waiting to animate in. */
+.motion .reveal:not([data-in]),
+.motion .reveal-img:not([data-in]),
+.motion .words:not([data-in]) .w > span {
+  will-change: opacity, transform;
 }
 
 .reveal[data-delay="1"] {
@@ -437,8 +444,8 @@
 
 .motion .words .w > span {
   translate: 0 110%;
-  transition: translate 1100ms var(--ease-silk);
-  transition-delay: calc(var(--wd, 0ms) + var(--wi, 0) * 60ms);
+  transition: translate 650ms var(--ease-out-soft);
+  transition-delay: calc(var(--wd, 0ms) + var(--wi, 0) * 45ms);
 }
 
 .motion .words[data-in] .w > span {
@@ -450,28 +457,22 @@
   overflow: hidden;
 }
 
+/*
+ * Image reveal uses only opacity + translate (compositor-friendly) instead of
+ * animating clip-path or scale every frame, which was the main source of jank.
+ */
 .motion .reveal-img {
-  clip-path: inset(14% 0 0 0 round 0.5rem);
   opacity: 0;
+  translate: 0 24px;
   transition:
-    clip-path 1300ms var(--ease-silk),
-    opacity 700ms ease;
-  transition-delay: var(--id, 0ms);
-}
-
-.motion .reveal-img > img {
-  scale: 1.12;
-  transition: scale 1600ms var(--ease-silk);
+    opacity 620ms var(--ease-out-soft),
+    translate 720ms var(--ease-out-soft);
   transition-delay: var(--id, 0ms);
 }
 
 .motion .reveal-img[data-in] {
-  clip-path: inset(0 0 0 0 round 0.5rem);
   opacity: 1;
-}
-
-.motion .reveal-img[data-in] > img {
-  scale: 1;
+  translate: 0 0;
 }
 
 /* Header settles in on first load. */

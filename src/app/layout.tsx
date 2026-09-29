@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     siteName: "Next 1 Education",
     images: [
       {
-        url: "/logo/custom-vertical-no-tagline-transparent-3000x1000.png",
+        url: "/og-image.webp",
         width: 1200,
-        height: 400,
+        height: 630,
         alt: "Next 1 Education Logo",
       },
     ],

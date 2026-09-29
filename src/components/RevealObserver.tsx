@@ -18,11 +18,17 @@ export default function RevealObserver() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          (entry.target as HTMLElement).dataset.in = "";
-          io.unobserve(entry.target);
+          const el = entry.target as HTMLElement;
+          el.dataset.in = "";
+          io.unobserve(el);
+          // Drop the compositor hint once the entrance transition is done, so idle
+          // elements don't keep GPU layers alive (that is what made scrolling feel heavy).
+          window.setTimeout(() => {
+            el.style.willChange = "auto";
+          }, 1400);
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
 
     const scan = (scope: ParentNode) => {
