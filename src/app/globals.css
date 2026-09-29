@@ -1,327 +1,547 @@
 @import "tailwindcss";
 
+/* Fonts resolve at the element, so the next/font variables on <html> are picked up. */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Palette taken from the Next 1 logo: deep navy "ink" and royal blue, on warm-neutral paper. */
+@theme {
+  --color-ink-950: #070f24;
+  --color-ink-900: #0b1736;
+  --color-ink-800: #13224b;
+  --color-ink-700: #23335f;
+
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #dce6ff;
+  --color-brand-200: #bdcfff;
+  --color-brand-300: #91adff;
+  --color-brand-400: #5f86fb;
+  --color-brand-500: #3a64f2;
+  --color-brand-600: #1f48e0;
+  --color-brand-700: #1a39b5;
+  --color-brand-800: #1b3290;
+
+  --color-paper: #f5f5f3;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @layer base {
-  :root {
-    --primary-blue: #0056d2;
-    --primary-hover: #0043a8;
-    --navy-dark: #0a192f;
-    --navy-deep: #050d1a;
-    --accent-red: #e85870;
-    --text-heading: #0f172a;
-    --text-body: #475569;
-    --text-muted: #64748b;
-    --border-light: #e2e8f0;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-open-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
   body {
-    color: var(--text-heading);
+    color: var(--color-ink-900);
     background-color: #ffffff;
-    font-family: var(--font-open-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-ink-900);
+  }
 }
 
-/* Audience tabs use brand colors with a smooth, saturated active state. */
-.nav-category-trigger {
-  color: #475569;
-  background-color: transparent;
-  border: 1px solid transparent;
-  transition:
-    color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
+/* ------------------------------------------------------------------ */
+/* Header                                                              */
+/* ------------------------------------------------------------------ */
 
-.nav-category-trigger:hover,
-.nav-category-trigger:focus-visible:not(.is-active) {
-  color: var(--nav-accent);
-  background-color: color-mix(in srgb, var(--nav-accent) 11%, white);
-  border-color: color-mix(in srgb, var(--nav-accent) 24%, white);
-  transform: translateY(-1px);
-}
-
-.nav-category-trigger.is-active {
-  color: white;
-  background-color: var(--nav-accent);
-  border-color: var(--nav-accent);
-}
-
-.nav-category-trigger:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--nav-accent) 28%, transparent);
-  outline-offset: 3px;
-}
-
-.mega-menu-card {
-  border: 1px solid rgb(226 232 240 / 85%);
-  background: linear-gradient(160deg, #fff, #fcfdff);
-  transition:
-    border-color 220ms ease,
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mega-menu-card:hover {
-  border-color: color-mix(in srgb, var(--nav-accent) 36%, white);
-  transform: translateY(-2px);
-}
-
-.mega-menu-item-title {
-  transition: color 180ms ease;
-}
-
-.mega-menu-item:hover .mega-menu-item-title {
-  color: var(--nav-accent);
-}
-
-.mega-menu-accent-text {
-  color: var(--nav-accent);
-}
-
-.mega-menu-child-link {
-  border-left: 2px solid #e2e8f0;
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-
-.mega-menu-child-link:hover {
-  border-color: var(--nav-accent);
-  background-color: color-mix(in srgb, var(--nav-accent) 6%, white);
-}
-
-.nav-talk-cta {
-  width: 2.75rem;
-  background: linear-gradient(120deg, #0066f5, #0052cc);
-  transition:
-    width 280ms cubic-bezier(0.16, 1, 0.3, 1),
-    background 200ms ease,
-    transform 200ms ease;
-}
-
-.nav-talk-cta:hover,
-.nav-talk-cta:focus-visible {
-  width: 9.25rem;
-  background: linear-gradient(120deg, #005bdc, #0043a8);
-  transform: translateY(-1px);
-}
-
-.nav-talk-cta:focus-visible {
-  outline: 3px solid rgb(0 102 245 / 28%);
-  outline-offset: 3px;
-}
-
-.nav-talk-label {
-  max-width: 0;
-  overflow: hidden;
+/* Small white logo that fades into the navy band once it becomes sticky. */
+.band-logo {
   opacity: 0;
-  transform: translateX(-0.25rem);
+  visibility: hidden;
+  transform: translateX(-8px);
   transition:
-    max-width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 260ms ease,
+    transform 420ms var(--ease-out-soft),
+    visibility 0s linear 420ms;
+}
+
+.site-band[data-stuck="true"] .band-logo {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 260ms ease,
+    transform 420ms var(--ease-out-soft),
+    visibility 0s;
+}
+
+.site-band[data-stuck="true"] {
+  box-shadow: 0 10px 24px -16px rgb(7 15 36 / 0.6);
+}
+
+.dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
     opacity 160ms ease,
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 260ms var(--ease-out-soft),
+    visibility 0s linear 260ms;
 }
 
-.nav-talk-cta:hover .nav-talk-label,
-.nav-talk-cta:focus-visible .nav-talk-label {
-  max-width: 5.5rem;
+.dropdown[data-open="true"] {
   opacity: 1;
-  transform: translateX(0);
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 220ms ease,
+    transform 360ms var(--ease-out-soft),
+    visibility 0s;
 }
 
-/* Full-width menu sits directly below the header and rounds only its attached lower edge. */
-.mega-menu-surface {
-  width: 100%;
+/* Invisible bridge between the nav bar and the dropdown so the pointer can cross the gap. */
+.dropdown::before {
+  content: "";
+  position: absolute;
+  inset: -0.75rem 0 auto 0;
+  height: 0.75rem;
+}
+
+.dropdown-link .dropdown-icon {
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.dropdown-link:hover .dropdown-icon,
+.dropdown-link:focus-visible .dropdown-icon {
+  background-color: var(--color-ink-900);
+  color: #fff;
+}
+
+.dropdown-link .dropdown-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 200ms ease,
+    transform 300ms var(--ease-out-soft);
+}
+
+.dropdown-link:hover .dropdown-arrow,
+.dropdown-link:focus-visible .dropdown-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* Primary buttons: a brand fill sweeps in from the left on hover, arrow nudges forward. */
+.btn-sweep {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #cbd5e1;
-  border-left: 1px solid #e2e8f0;
-  border-radius: 0 0 1.25rem 1.25rem;
-  background: #fff;
-}
-
-/* Reveal the menu from the top and reverse the same motion when it closes. */
-.mega-menu-layer {
-  clip-path: inset(0 0 100% 0 round 0 0 1.25rem 1.25rem);
-  opacity: 0;
-  transform: translateY(-0.5rem) scale(0.99);
-  transform-origin: top center;
-  visibility: hidden;
-  pointer-events: none;
   transition:
-    clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 180ms ease,
-    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0s linear 320ms;
+    transform 300ms var(--ease-out-soft),
+    box-shadow 300ms var(--ease-out-soft),
+    color 300ms ease,
+    border-color 300ms ease;
 }
 
-.mega-menu-layer.is-open {
-  clip-path: inset(0 0 0 0 round 0 0 1.25rem 1.25rem);
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  visibility: visible;
-  pointer-events: auto;
-  transition:
-    clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 180ms ease,
-    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0s;
+.btn-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--sweep, var(--color-brand-600));
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 450ms var(--ease-out-soft);
 }
 
-/* The mobile menu enters from the right with a quiet, connected backdrop. */
-.mobile-nav-backdrop {
-  background-color: rgb(15 23 42 / 14%);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 220ms ease,
-    visibility 0s linear 360ms;
+.btn-sweep:hover,
+.btn-sweep:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px -14px rgb(11 23 54 / 0.55);
 }
 
-.mobile-nav-backdrop.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transition:
-    opacity 220ms ease,
-    visibility 0s;
+.btn-sweep:hover::before,
+.btn-sweep:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
 
-.mobile-nav-drawer {
-  opacity: 0;
-  transform: translateX(100%);
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 240ms ease,
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 360ms;
-}
-
-.mobile-nav-drawer.is-open {
-  opacity: 1;
-  transform: translateX(0);
-  visibility: visible;
-  pointer-events: auto;
-  transition:
-    opacity 240ms ease,
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s;
-}
-
-.mobile-nav-content {
-  opacity: 0;
-  transform: translateY(0.5rem);
-  transition:
-    opacity 220ms ease,
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mobile-nav-drawer.is-open .mobile-nav-content {
-  opacity: 1;
+.btn-sweep:active {
   transform: translateY(0);
-  transition-delay: 80ms;
 }
 
-.mobile-nav-category {
-  transition: border-color 200ms ease;
+/* Outlined button: navy text on transparent; navy fill with white text on hover. */
+.btn-outline {
+  --sweep: var(--color-ink-900);
+  color: var(--color-ink-900);
+  border: 2px solid var(--color-ink-900);
+  background-color: transparent;
 }
 
-.mobile-nav-category-trigger {
-  border-radius: 0.625rem;
-  padding-inline: 0.5rem;
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  color: #ffffff;
+}
+
+/* White button on dark backgrounds: a light blue fill, navy text stays. */
+.btn-light {
+  --sweep: var(--color-brand-100);
+  color: var(--color-ink-900);
+  background-color: #ffffff;
+}
+
+/* Let's Talk: an icon at rest, the label slides out on hover or keyboard focus. */
+.talk-btn {
+  width: 2.5rem;
   transition:
-    color 180ms ease,
-    background-color 180ms ease;
+    width 380ms var(--ease-out-soft),
+    background-color 220ms ease;
 }
 
-.mobile-nav-category-trigger:hover,
-.mobile-nav-category-trigger[aria-expanded="true"] {
-  background-color: #f8fafc;
+.talk-btn:hover,
+.talk-btn:focus-visible {
+  width: 8.5rem;
 }
 
-.mobile-nav-category-trigger:focus-visible {
-  outline: 2px solid rgb(0 86 210 / 35%);
-  outline-offset: -2px;
+.talk-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(-4px);
+  transition:
+    max-width 380ms var(--ease-out-soft),
+    opacity 200ms ease,
+    transform 380ms var(--ease-out-soft);
 }
-.mobile-nav-accordion {
+
+.talk-btn:hover .talk-label,
+.talk-btn:focus-visible .talk-label {
+  max-width: 6rem;
+  opacity: 1;
+  transform: none;
+}
+
+/* Mobile drawer: slides in from the right edge; the page behind dims. */
+.mobile-drawer {
+  visibility: hidden;
+  transform: translateX(100%);
+  transition:
+    transform 460ms cubic-bezier(0.55, 0, 0.1, 1),
+    visibility 0s linear 460ms;
+}
+
+.mobile-drawer[data-open="true"] {
+  visibility: visible;
+  transform: translateX(0);
+  transition:
+    transform 620ms cubic-bezier(0.19, 1, 0.22, 1),
+    visibility 0s;
+}
+
+.drawer-backdrop {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 380ms ease,
+    visibility 0s linear 380ms;
+}
+
+.drawer-backdrop[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 420ms ease,
+    visibility 0s;
+}
+
+.mobile-stagger > * {
+  opacity: 0;
+  transform: translateX(28px);
+  transition:
+    opacity 300ms ease,
+    transform 420ms var(--ease-out-soft);
+}
+
+.mobile-drawer[data-open="true"] .mobile-stagger > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 420ms ease,
+    transform 700ms var(--ease-silk);
+  transition-delay: calc(140ms + var(--i, 0) * 60ms);
+}
+
+/* Phone/tablet header gains a soft shadow once the page scrolls. */
+.mobile-bar {
+  transition:
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.mobile-bar[data-scrolled="true"] {
+  border-color: transparent;
+  box-shadow: 0 10px 24px -18px rgb(7 15 36 / 0.45);
+}
+
+/* Programme links inside an opened mobile section slide in one by one. */
+.accordion .acc-item {
+  opacity: 0;
+  translate: 0 8px;
+  transition:
+    opacity 320ms ease,
+    translate 520ms var(--ease-silk),
+    background-color 200ms ease;
+}
+
+.accordion[data-open="true"] .acc-item {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: calc(80ms + var(--ai, 0) * 45ms), calc(80ms + var(--ai, 0) * 45ms), 0ms;
+}
+
+.accordion {
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
-  transform: translateY(-0.25rem);
   transition:
-    grid-template-rows 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 200ms ease,
-    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    grid-template-rows 380ms var(--ease-out-soft),
+    opacity 240ms ease;
 }
 
-.mobile-nav-accordion.is-open {
+.accordion[data-open="true"] {
   grid-template-rows: 1fr;
   opacity: 1;
-  transform: translateY(0);
 }
 
-.mobile-nav-accordion-inner {
+.accordion > div {
   min-height: 0;
   overflow: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .nav-talk-cta,
-  .nav-talk-label,
-  .mega-menu-layer,
-  .mobile-nav-backdrop,
-  .mobile-nav-drawer,
-  .mobile-nav-content,
-  .mobile-nav-category,
-  .mobile-nav-category-trigger,
-  .mobile-nav-accordion {
-    transition-duration: 0.01ms;
-    transition-delay: 0s;
-  }
+/* ------------------------------------------------------------------ */
+/* Page details                                                        */
+/* ------------------------------------------------------------------ */
+
+/* Cards: a thin brand rule draws across the top on hover. */
+.card-rule {
+  position: relative;
+  transition:
+    box-shadow 420ms var(--ease-out-soft),
+    transform 420ms var(--ease-out-soft),
+    border-color 240ms ease;
 }
 
-/* Subtle cross-fade for category switching */
-@keyframes categoryCrossFade {
-  0% {
-    opacity: 0.7;
-    transform: translateY(3px);
+.card-rule::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 3px;
+  background-color: var(--color-brand-600);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 480ms var(--ease-out-soft);
+}
+
+.card-rule:hover,
+.card-rule:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px -30px rgb(7 15 36 / 0.45);
+}
+
+.card-rule:hover::before,
+.card-rule:focus-within::before {
+  transform: scaleX(1);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateY(0);
+    translate: 0 0;
   }
 }
 
-.animate-category-fade {
-  animation: categoryCrossFade 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.motion .rise {
+  animation: rise-in 1000ms var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
 }
 
-/* Custom Minimal Scrollbar */
+/*
+ * Scroll reveals. `html.motion` is only set when JavaScript runs and the visitor has not
+ * asked for reduced motion; RevealObserver adds `data-in` as each element enters view.
+ * Without it, everything is simply visible.
+ */
+:root {
+  --ease-silk: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.motion .reveal {
+  opacity: 0;
+  translate: 0 28px;
+  /* Includes hover properties so cards that also lift on hover keep smooth transitions. */
+  transition:
+    opacity 900ms var(--ease-out-soft) calc(var(--rd, 0) * 110ms),
+    translate 1100ms var(--ease-silk) calc(var(--rd, 0) * 110ms),
+    transform 420ms var(--ease-out-soft),
+    box-shadow 420ms var(--ease-out-soft),
+    border-color 240ms ease;
+}
+
+.reveal[data-delay="1"] {
+  --rd: 1;
+}
+.reveal[data-delay="2"] {
+  --rd: 2;
+}
+.reveal[data-delay="3"] {
+  --rd: 3;
+}
+.reveal[data-delay="4"] {
+  --rd: 4;
+}
+.reveal[data-delay="5"] {
+  --rd: 5;
+}
+
+.motion .reveal[data-in] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Headings: each word slides up from behind a mask. */
+.words .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.words .w > span {
+  display: inline-block;
+}
+
+.motion .words .w > span {
+  translate: 0 110%;
+  transition: translate 1100ms var(--ease-silk);
+  transition-delay: calc(var(--wd, 0ms) + var(--wi, 0) * 60ms);
+}
+
+.motion .words[data-in] .w > span {
+  translate: 0 0;
+}
+
+/* Images: a soft upward unmask with a slow settle of the zoom. */
+.reveal-img {
+  overflow: hidden;
+}
+
+.motion .reveal-img {
+  clip-path: inset(14% 0 0 0 round 0.5rem);
+  opacity: 0;
+  transition:
+    clip-path 1300ms var(--ease-silk),
+    opacity 700ms ease;
+  transition-delay: var(--id, 0ms);
+}
+
+.motion .reveal-img > img {
+  scale: 1.12;
+  transition: scale 1600ms var(--ease-silk);
+  transition-delay: var(--id, 0ms);
+}
+
+.motion .reveal-img[data-in] {
+  clip-path: inset(0 0 0 0 round 0.5rem);
+  opacity: 1;
+}
+
+.motion .reveal-img[data-in] > img {
+  scale: 1;
+}
+
+/* Header settles in on first load. */
+@keyframes header-in {
+  from {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.motion .header-in {
+  animation: header-in 800ms var(--ease-silk) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Slim scrollbars across the whole site (page, dropdown menus, phone menu).
+ * `scrollbar-width` covers Chrome, Edge and Firefox; the ::-webkit rules cover Safari.
+ */
+html,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(11 23 54 / 0.28) transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
+  height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background-color: rgb(11 23 54 / 0.28);
+  border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background-color: rgb(11 23 54 / 0.45);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Hide the scrollbar on the horizontal "Jump to" list on phones. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
