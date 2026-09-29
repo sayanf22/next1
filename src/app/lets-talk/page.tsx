@@ -1,58 +1,82 @@
+import { Suspense } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import ContactOptions, { ContactCards } from "@/components/ContactOptions";
+import { CenteredHeading, LeftHeading, PageHeader } from "@/components/ui";
+import { sections } from "@/data/programmes";
 
-const phoneNumber = "+91 98765 43210";
+export const metadata: Metadata = {
+  title: "Let's Talk",
+  description: "Speak with a Next 1 Education advisor by phone or WhatsApp.",
+};
+
+const nextSteps = [
+  { title: "Reach out", text: "Call us or send a WhatsApp message, whichever is easier for you." },
+  { title: "Tell us about yourself", text: "Your class, course or role, and the decision you are working on." },
+  { title: "Find the right start", text: "An advisor will suggest the programme or service that fits." },
+];
 
 export default function LetsTalkPage() {
   return (
-    <main className="min-h-[calc(100vh-64px)] bg-[#f7faff] px-4 py-10 sm:px-8 sm:py-16">
-      <section className="mx-auto max-w-3xl">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 transition-colors hover:text-[#0056d2]"
-        >
-          <span aria-hidden="true">←</span>
-          Back to home
-        </Link>
+    <main>
+      <PageHeader
+        crumb="Let's Talk"
+        kicker="Let's talk"
+        title="Let's make your next step clearer."
+        intro="Choose a quick call or send us a message. We'll help you find the right place to begin."
+        image={{ src: "/images/content/services.webp", alt: "An advisor greeting a visitor across a desk" }}
+      />
 
-        <div className="mt-6 rounded-[1.75rem] border border-slate-200 bg-white p-7 sm:p-12">
-          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#0056d2]">
-            Next 1 Education
-          </p>
-          <h1 className="mt-4 max-w-xl text-4xl font-bold tracking-[-0.04em] text-slate-950 sm:text-5xl">
-            Let&apos;s make your next step clearer.
-          </h1>
-          <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
-            Choose a quick conversation or send us a message. We&apos;ll help you find the right place to begin.
-          </p>
+      <section aria-label="Contact options" className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
+        <Suspense fallback={<ContactCards topic={null} />}>
+          <ContactOptions />
+        </Suspense>
+      </section>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://wa.me/919876543210?text=Hello%20Next%201%20Education%2C%20I%20would%20like%20guidance."
-              className="rounded-xl border border-blue-100 bg-blue-50 p-5 transition-colors hover:border-blue-200 hover:bg-blue-100/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056d2]/40"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0056d2] text-white">
-                <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z" />
-                </svg>
+      <section aria-labelledby="next-title" className="bg-paper px-5 py-16 sm:px-8 sm:py-20">
+        <CenteredHeading id="next-title" kicker="What happens next" title="Three simple steps" />
+        <ol className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
+          {nextSteps.map((step, index) => (
+            <li key={step.title} data-delay={index} className="reveal rounded-lg bg-white p-6 ring-1 ring-slate-200">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 font-display text-[15px] font-semibold text-white">
+                {index + 1}
               </span>
-              <span className="mt-5 block text-base font-bold text-slate-900">Send a message</span>
-              <span className="mt-1 block text-sm leading-relaxed text-slate-600">Start a WhatsApp conversation.</span>
-            </a>
+              <h3 className="mt-5 text-lg font-semibold text-ink-900">{step.title}</h3>
+              <p className="mt-2 text-[15.5px] leading-7 text-slate-700">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-            <a
-              href="tel:+919876543210"
-              className="rounded-xl border border-slate-200 bg-white p-5 transition-colors hover:border-rose-200 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85870]/40"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-[#c63d57]">
-                <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </span>
-              <span className="mt-5 block text-base font-bold text-slate-900">Call an advisor</span>
-              <span className="mt-1 block text-sm leading-relaxed text-slate-600">{phoneNumber}</span>
-            </a>
-          </div>
-        </div>
+      <section aria-labelledby="areas-title" className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20">
+        <LeftHeading id="areas-title" kicker="Before you get in touch" title="See what we offer" />
+        <ul className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
+          {sections.map((section) => {
+            const Icon = section.icon;
+
+            return (
+              <li key={section.id}>
+                <Link
+                  href={section.href}
+                  className="group flex items-center gap-4 py-5 transition-colors duration-200 hover:bg-paper sm:px-4"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700 transition-colors duration-300 group-hover:bg-ink-900 group-hover:text-white">
+                    <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.9} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg font-semibold text-ink-900">{section.label}</span>
+                    <span className="mt-0.5 block text-[15px] leading-6 text-slate-700">{section.menuIntro}</span>
+                  </span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-5 w-5 shrink-0 text-slate-400 transition-all duration-300 ease-out-soft group-hover:translate-x-1 group-hover:text-ink-900"
+                  />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </main>
   );

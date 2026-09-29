@@ -1,17 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import RevealObserver from "@/components/RevealObserver";
 
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
+const motionScript = `(function(){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion');setTimeout(function(){if(!window.__reveal)d.classList.remove('motion')},4000)}catch(e){}})();`;
+
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#0b1736",
   width: "device-width",
   initialScale: 1,
 };
@@ -23,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Next 1 Education",
   },
   description:
-    "Empowering school students (Class 8–12), college grads, and working professionals with scientific stream selection, ATS resume writing, 1-on-1 career coaching, and college consultation.",
+    "Career guidance for school students (Class 8–12), college students, working professionals and institutions: stream selection, resume writing, career coaching and college consultation.",
   keywords: [
     "career counseling",
     "stream selection class 10",
@@ -33,13 +38,11 @@ export const metadata: Metadata = {
     "career coaching India",
     "Next 1 Education",
     "student mentoring",
-    "corporate workshops",
   ],
   authors: [{ name: "Next 1 Education" }],
   openGraph: {
     title: "Next 1 Education | Stream Selection, Career Counseling & Mentorship",
-    description:
-      "Scientific psychometric assessments, 1-on-1 career coaching, resume writing, and institutional training programs.",
+    description: "Career guidance for students, working professionals and institutions.",
     url: "https://next1education.com",
     siteName: "Next 1 Education",
     images: [
@@ -53,26 +56,34 @@ export const metadata: Metadata = {
     locale: "en_IN",
     type: "website",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${openSans.variable}`}
+      className={`${inter.variable} ${poppins.variable}`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+      <head>
+        {/* Enable entrance animations only when JS runs and motion is allowed; fall back to visible content. */}
+        <script dangerouslySetInnerHTML={{ __html: motionScript }} />
+      </head>
+      <body className="flex min-h-screen flex-col bg-white font-sans text-ink-900 antialiased">
+        <RevealObserver />
+        <a
+          href="#content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <div id="content" className="flex-1">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
