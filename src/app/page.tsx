@@ -30,10 +30,10 @@ const jumpLinks = [
 ];
 
 const whyPoints = [
-  "Guidance for school students, college students, working professionals and institutions",
-  "Education, career counselling and skill development in one place",
-  "Every programme starts with understanding where you are and what you want",
-  "Support shaped around Indian boards, entrance exams and campus placements",
+  "For students, professionals and institutions",
+  "Guidance, counselling and skills in one place",
+  "Every programme starts with your goals",
+  "Built around Indian boards, exams and placements",
 ];
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
@@ -137,10 +137,8 @@ export default function Home() {
           <div>
             <LeftHeading id="why-title" kicker="Why come to us" title="Why Next 1 Education">
               <p>
-                We bring education guidance, career counselling and skill development together. Whether you are a
-                student choosing a stream after Class 10, a graduate preparing for campus placements, a professional
-                planning your next move, or a school or college supporting its students, we start by understanding where
-                you are and what you want to achieve, and then help you plan the steps to get there.
+                Guidance, career counselling and skill development in one place. From choosing a stream to planning
+                your next move, we understand your goals and map out the steps to reach them.
               </p>
             </LeftHeading>
             <ul className="mt-8 space-y-3.5">
