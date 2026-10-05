@@ -159,10 +159,6 @@ export default function Footer() {
           <p>© {year} Next 1 Education. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <span>
-              Privacy Policy
-            </span>
-            <span aria-hidden="true" className="hidden sm:inline">·</span>
-            <span>
               Built by{" "}
               <a
                 href="https://whycreatives.in"
