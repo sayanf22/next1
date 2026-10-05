@@ -139,7 +139,7 @@ export const sectionExtras: Record<string, SectionExtra> = {
       },
       {
         q: "Can I book more than one service?",
-        a: "Yes. For example, you can pair Resume Writing with a Behaviour Session before your placement or job interviews.",
+        a: "Yes. For example, you can pair Resume Writing with a Behavioural Session before your placement or job interviews.",
       },
       {
         q: "How do I get started?",

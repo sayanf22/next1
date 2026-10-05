@@ -404,23 +404,7 @@ export default function Navbar() {
         }}
       >
         <div className="header-in relative mx-auto flex h-16 max-w-7xl items-center justify-center px-8" style={{ "--d": "120ms" } as CSSProperties}>
-          <Link
-            href="/"
-            onClick={closeAll}
-            aria-label="Next 1 Education home"
-            tabIndex={stuck ? undefined : -1}
-            aria-hidden={!stuck}
-            className="band-logo absolute left-8"
-          >
-            <Image
-              src={LOGO.src}
-              alt=""
-              width={LOGO.width}
-              height={LOGO.height}
-              sizes="110px"
-              className="h-11 w-auto brightness-0 invert"
-            />
-          </Link>
+          {/* Logo hidden from the navy band — scroll-in effect removed per client brief */}
 
           <nav aria-label="Main">
             <ul className="flex items-center gap-1">

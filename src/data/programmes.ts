@@ -153,7 +153,7 @@ export const sections: Section[] = [
           },
           {
             id: "behaviour-session",
-            title: "Behaviour Session",
+            title: "Behavioural Session",
             tag: "Corporate Etiquette",
             icon: MessagesSquare,
             summary: "Soft skills, professional communication, corporate EQ and group discussion practice.",
@@ -412,7 +412,7 @@ export const sections: Section[] = [
           },
           {
             id: "behaviour-session",
-            title: "Behaviour Session",
+            title: "Behavioural Session",
             tag: "Interview Mastery",
             icon: MessagesSquare,
             summary: "Behavioural interview preparation, STAR framework coaching and executive presence.",

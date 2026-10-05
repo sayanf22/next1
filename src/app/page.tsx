@@ -165,6 +165,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Aim */}
+      <section aria-labelledby="our-aim-title" className="bg-paper px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="reveal">
+              <Kicker center>Our Aim</Kicker>
+            </div>
+            <h2
+              id="our-aim-title"
+              className="mt-4 text-balance text-[2rem] font-bold leading-[1.15] tracking-tight text-ink-900 sm:text-[2.6rem]"
+            >
+              <Words text="What drives us" delay={120} />
+            </h2>
+            <p
+              data-delay="3"
+              className="reveal mt-5 text-[16.5px] leading-8 text-slate-700 sm:text-[17px]"
+            >
+              Everything we do at Next 1 Education is built around one goal — helping the young generation find their direction with clarity, confidence and the right support.
+            </p>
+          </div>
+
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                number: "01",
+                title: "Brighten and sharpen the young generation",
+                text: "We work to open up possibilities for young people — giving them the knowledge and perspective to see a wider world of options.",
+              },
+              {
+                number: "02",
+                title: "Guide students in the correct direction",
+                text: "Every student has a natural direction. Our role is to help them find it, not to push them toward a path that does not fit.",
+              },
+              {
+                number: "03",
+                title: "Help students avoid career mistakes",
+                text: "Wrong choices early on can cost years. We give students the information and guidance to make decisions they will not regret.",
+              },
+              {
+                number: "04",
+                title: "Acting with the right intent",
+                text: "We approach every student and family with honesty. Our advice is shaped by what is right for the student, not by any other agenda.",
+              },
+            ].map((item, index) => (
+              <li
+                key={item.number}
+                data-delay={index}
+                className="reveal card-rule flex flex-col rounded-lg border border-slate-200 bg-white p-7"
+              >
+                <span className="font-display text-3xl font-bold text-brand-100">{item.number}</span>
+                <h3 className="mt-5 text-[17px] font-semibold leading-snug text-ink-900">{item.title}</h3>
+                <p className="mt-3 flex-1 text-[15px] leading-7 text-slate-600">{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Programmes */}
       <section id="programmes" aria-labelledby="programmes-title" className="scroll-mt-20 bg-paper py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
