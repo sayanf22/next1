@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MessageCircle, Phone } from "lucide-react";
-import { contact, programmeHref, sections, sectionProgrammes, telHref, whatsappHref } from "@/data/programmes";
+import {
+  contact,
+  mailtoHref,
+  programmeHref,
+  sections,
+  sectionProgrammes,
+  telHref,
+  whatsappHref,
+} from "@/data/programmes";
 
 /** Pages column: just the top-level navigation links */
 const pageLinks = [
@@ -62,13 +70,13 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:info@next1education.com"
+                  href={mailtoHref()}
                   className="group inline-flex items-center gap-3 text-[15px] font-medium text-slate-700 transition-colors duration-200 hover:text-ink-900"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 transition-colors duration-300 group-hover:bg-ink-900 group-hover:text-white">
                     <Mail aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
                   </span>
-                  info@next1education.com
+                  {contact.email}
                 </a>
               </li>
               <li>
@@ -84,7 +92,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.linkedin.com/company/next1education/"
+                  href={contact.linkedin}
                   target="_blank"
                   rel="noopener"
                   className="group inline-flex items-center gap-3 text-[15px] font-medium text-slate-700 transition-colors duration-200 hover:text-ink-900"
@@ -103,17 +111,20 @@ export default function Footer() {
               </li>
             </ul>
 
-            <Link
-              href="/lets-talk"
+            <a
+              href={contact.calendly}
+              target="_blank"
+              rel="noopener"
               className="btn-sweep group mt-8 inline-flex h-12 items-center gap-2.5 rounded-md bg-ink-900 px-6 font-display text-[14.5px] font-semibold text-white"
             >
               Schedule a consultation
+              <span className="sr-only"> (opens in a new tab)</span>
               <ArrowRight
                 aria-hidden="true"
                 className="h-4 w-4 transition-transform duration-300 ease-out-soft group-hover:translate-x-1"
                 strokeWidth={2.4}
               />
-            </Link>
+            </a>
           </div>
 
           {/* Link columns: Pages + Services */}

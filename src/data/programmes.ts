@@ -453,7 +453,18 @@ export const sections: Section[] = [
 export const contact = {
   phone: "+91 98765 43210",
   whatsapp: "919876543210",
+  email: "info@next1education.com",
+  /** Booking page for "Schedule a consultation" buttons. */
+  calendly: "https://calendly.com/next1education",
+  /** Enquiry form (Google Forms). */
+  form: "https://forms.gle/tKzRoFbtzy8TLT9j9",
+  linkedin: "https://www.linkedin.com/company/next1education/",
 };
+
+export const mailtoHref = (topic?: string | null) =>
+  topic
+    ? `mailto:${contact.email}?subject=${encodeURIComponent(`Enquiry: ${topic}`)}`
+    : `mailto:${contact.email}`;
 
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 

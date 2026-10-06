@@ -8,11 +8,11 @@ import { sections } from "@/data/programmes";
 
 export const metadata: Metadata = {
   title: "Let's Talk",
-  description: "Speak with a Next 1 Education advisor by phone or WhatsApp.",
+  description: "Book a consultation, fill the enquiry form, or reach a Next 1 Education advisor by email, phone or WhatsApp.",
 };
 
 const nextSteps = [
-  { title: "Reach out", text: "Call us or send a WhatsApp message, whichever is easier for you." },
+  { title: "Reach out", text: "Book a time, fill the form, or contact us by email, phone or WhatsApp." },
   { title: "Tell us about yourself", text: "Your class, course or role, and the decision you are working on." },
   { title: "Find the right start", text: "An advisor will suggest the programme or service that fits." },
 ];
@@ -24,7 +24,7 @@ export default function LetsTalkPage() {
         crumb="Let's Talk"
         kicker="Let's talk"
         title="Let's make your next step clearer."
-        intro="Choose a quick call or send us a message. We'll help you find the right place to begin."
+        intro="Book a consultation, fill in the enquiry form, or reach us directly. We'll help you find the right place to begin."
         image={{ src: "/images/content/services.webp", alt: "An advisor greeting a visitor across a desk" }}
       />
 

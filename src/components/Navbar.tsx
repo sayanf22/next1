@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowRight, ChevronDown, Phone } from "lucide-react";
-import { programmeHref, sections, type Section } from "@/data/programmes";
+import { contact, programmeHref, sections, type Section } from "@/data/programmes";
 
 const CLOSE_DELAY = 150;
 /** Height of the white logo row on desktop; past this the navy band is stuck to the top. */
@@ -382,13 +382,16 @@ export default function Navbar() {
           </nav>
 
           <div className="border-t border-slate-200 p-5">
-            <Link
-              href="/lets-talk"
+            <a
+              href={contact.calendly}
+              target="_blank"
+              rel="noopener"
               onClick={closeAll}
               className="btn-sweep flex h-13 items-center justify-center rounded-md bg-ink-900 font-display text-[15.5px] font-semibold text-white"
             >
               Schedule a consultation
-            </Link>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
         </div>
       </div>

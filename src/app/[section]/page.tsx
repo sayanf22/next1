@@ -7,7 +7,7 @@ import SectionNav, { type SectionNavEntry } from "@/components/SectionNav";
 import Words from "@/components/Words";
 import { ButtonArrow, CenteredHeading, CtaBand, LeftHeading, PageHeader, btnOutline, btnPrimary } from "@/components/ui";
 import { getProgrammeExtra, getSectionExtra } from "@/data/details";
-import { getSection, sections, type Programme, type Section } from "@/data/programmes";
+import { contact, getSection, sections, type Programme, type Section } from "@/data/programmes";
 
 export const dynamicParams = false;
 
@@ -156,10 +156,11 @@ export default async function SectionPage({ params }: Props) {
         image={extra?.image}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/lets-talk" className={btnPrimary}>
+          <a href={contact.calendly} target="_blank" rel="noopener" className={btnPrimary}>
             Schedule a consultation
+            <span className="sr-only"> (opens in a new tab)</span>
             <ButtonArrow />
-          </Link>
+          </a>
           <a href={`#${entries[0].id}`} className={btnOutline}>
             Explore programmes
           </a>

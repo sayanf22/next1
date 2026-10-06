@@ -6,7 +6,7 @@ import AnimatedMetric from "@/components/AnimatedMetric";
 import Words from "@/components/Words";
 import { ButtonArrow, CenteredHeading, CtaBand, Kicker, LeftHeading, btnOutline, btnPrimary } from "@/components/ui";
 import { getSectionExtra } from "@/data/details";
-import { programmeHref, sections, sectionProgrammes } from "@/data/programmes";
+import { contact, programmeHref, sections, sectionProgrammes } from "@/data/programmes";
 
 const guidanceSteps = [
   { title: "Explore careers", description: "Find paths that fit your strengths.", icon: Compass },
@@ -63,10 +63,11 @@ export default function Home() {
             className="rise mx-auto mt-9 flex max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center"
             style={delay(240)}
           >
-            <Link href="/lets-talk" className={btnPrimary}>
+            <a href={contact.calendly} target="_blank" rel="noopener" className={btnPrimary}>
               Schedule a consultation
+              <span className="sr-only"> (opens in a new tab)</span>
               <ButtonArrow />
-            </Link>
+            </a>
             <Link href="#programmes" className={btnOutline}>
               Explore programmes
             </Link>
@@ -156,10 +157,16 @@ export default function Home() {
               ))}
             </ul>
             <div data-delay="5" className="reveal mt-9">
-              <Link href="/lets-talk" className={`${btnPrimary} w-full sm:w-auto`}>
+              <a
+                href={contact.calendly}
+                target="_blank"
+                rel="noopener"
+                className={`${btnPrimary} w-full sm:w-auto`}
+              >
                 Schedule a consultation
+                <span className="sr-only"> (opens in a new tab)</span>
                 <ButtonArrow />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

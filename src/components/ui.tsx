@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import type { ImageRef } from "@/data/details";
 import Words from "@/components/Words";
+import { contact } from "@/data/programmes";
 
 const btnBase =
   "btn-sweep group inline-flex h-12 items-center justify-center gap-2.5 rounded-md px-6 font-display text-[14.5px] font-semibold";
@@ -194,10 +195,16 @@ export function CtaBand({
           </h2>
           <p className="mt-4 text-[16.5px] leading-7 text-slate-300 sm:text-[17px]">{text}</p>
         </div>
-        <Link href="/lets-talk" className={`${btnLight} reveal w-full shrink-0 sm:w-auto`}>
+        <a
+          href={contact.calendly}
+          target="_blank"
+          rel="noopener"
+          className={`${btnLight} reveal w-full shrink-0 sm:w-auto`}
+        >
           Schedule a consultation
+          <span className="sr-only"> (opens in a new tab)</span>
           <ButtonArrow />
-        </Link>
+        </a>
       </div>
     </section>
   );
