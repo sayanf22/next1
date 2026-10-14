@@ -127,7 +127,7 @@ export default function Home() {
             <div className="reveal-img relative rounded-lg">
               <Image
                 src="/images/content/why-home.webp"
-                alt="Students attending a session in a classroom"
+                alt="A speaker presenting to a group of students in a bright classroom"
                 width={1200}
                 height={800}
                 sizes="(min-width: 1024px) 600px, calc(100vw - 2.5rem)"
@@ -189,7 +189,7 @@ export default function Home() {
               data-delay="3"
               className="reveal mt-5 text-[16.5px] leading-8 text-slate-700 sm:text-[17px]"
             >
-              Everything we do at Next 1 Education is built around one goal — helping the young generation find their direction with clarity, confidence and the right support.
+              Everything we do at Next 1 Education is built around one goal â€” helping the young generation find their direction with clarity, confidence and the right support.
             </p>
           </div>
 
@@ -198,7 +198,7 @@ export default function Home() {
               {
                 number: "01",
                 title: "Brighten and sharpen the young generation",
-                text: "We work to open up possibilities for young people — giving them the knowledge and perspective to see a wider world of options.",
+                text: "We work to open up possibilities for young people â€” giving them the knowledge and perspective to see a wider world of options.",
               },
               {
                 number: "02",

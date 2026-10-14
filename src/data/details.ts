@@ -28,7 +28,7 @@ export const sectionExtras: Record<string, SectionExtra> = {
     highlights: [
       {
         title: "School students",
-        text: "Stream and subject selection in Class 8–10, and career, entrance exam and college planning in Class 11–12.",
+        text: "Stream and subject selection in Class 8â€“10, and career, entrance exam and college planning in Class 11â€“12.",
       },
       {
         title: "College students",
@@ -152,11 +152,11 @@ export const sectionExtras: Record<string, SectionExtra> = {
 /** Keyed as `${sectionId}:${programmeId}`. */
 export const programmeExtras: Record<string, ProgrammeExtra> = {
   "students:class-8-10": {
-    image: img("class-8-10", "Two school students in uniform working at a classroom desk"),
+    image: img("class-8-10", "Two school students in neat uniforms standing together"),
     why: "Science, Commerce and Humanities each lead to different courses, entrance exams and careers. Choosing based on interests and aptitude, rather than peer pressure or guesswork, helps students pick subjects they can do well in and enjoy.",
   },
   "students:class-11-12": {
-    image: img("class-11-12", "Students seated at desks in a classroom"),
+    image: img("class-11-12", "A student reading in a modern library"),
     why: "Board exams, entrance exams and admission timelines all arrive in the final two years of school. A clear career direction makes it easier to decide which exams to prepare for and which colleges to apply to.",
   },
   "students:resume-writing": {
@@ -168,7 +168,7 @@ export const programmeExtras: Record<string, ProgrammeExtra> = {
     why: "College offers many possible directions, and it is easy to follow the crowd. Understanding your strengths early helps you choose electives, internships and projects that build towards a career you want.",
   },
   "students:behaviour-session": {
-    image: img("student-behaviour", "A group of students in discussion around a table"),
+    image: img("student-behaviour", "A trainer speaking with students in blazers seated around a table"),
     why: "Group discussions and interviews in placement rounds assess communication, teamwork and conduct as well as knowledge. These skills can be learnt and practised, and they continue to matter once you start work.",
   },
   "students:government-jobs": {
@@ -200,11 +200,11 @@ export const programmeExtras: Record<string, ProgrammeExtra> = {
     why: "Individual counselling for every student is difficult to arrange at scale. Cohort mentoring brings industry guidance to a whole batch in a structured way.",
   },
   "institutions:seminars-workshops": {
-    image: img("seminars", "Students attending a session in front of a projector screen"),
+    image: img("seminars", "A seminar hall with an audience seated for a session"),
     why: "Many students make decisions about further study and careers with limited information. A focused seminar gives a whole group an accurate picture of their options in a single session.",
   },
   "services:career-coaching": {
-    image: img("svc-coaching", "A career coach in conversation with a client across a desk"),
+    image: img("svc-coaching", "A career coach talking with a client over a laptop"),
     why: "Career decisions are easier with someone who can offer an outside view. Regular one-on-one coaching keeps your goals clear and your next steps practical.",
   },
   "services:resume-writing": {
@@ -212,11 +212,11 @@ export const programmeExtras: Record<string, ProgrammeExtra> = {
     why: "Your resume, cover letter and LinkedIn profile are often read together. When they tell the same clear story, recruiters get a consistent picture of who you are and what you offer.",
   },
   "services:behaviour-session": {
-    image: img("svc-behaviour", "Two people in a one-on-one interview conversation"),
+    image: img("svc-behaviour", "An interview panel in conversation with a candidate at a table"),
     why: "Behavioural questions ask for real examples, and unprepared answers can lose their point. A simple structure like STAR helps you give answers that are clear and complete.",
   },
   "services:technical-guidance-mentoring": {
-    image: img("svc-technical", "Students working at computers in a lab"),
+    image: img("svc-technical", "Two colleagues working together at a computer"),
     why: "Technical interviews test problem solving and design thinking as well as knowledge. Guided practice with a mentor helps you find gaps and build confidence.",
   },
 };
