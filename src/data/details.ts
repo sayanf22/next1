@@ -152,7 +152,7 @@ export const sectionExtras: Record<string, SectionExtra> = {
 /** Keyed as `${sectionId}:${programmeId}`. */
 export const programmeExtras: Record<string, ProgrammeExtra> = {
   "students:class-8-10": {
-    image: img("class-8-10", "Two school students in neat uniforms standing together"),
+    image: img("class-8-10", "A smiling student with glasses reading a book"),
     why: "Science, Commerce and Humanities each lead to different courses, entrance exams and careers. Choosing based on interests and aptitude, rather than peer pressure or guesswork, helps students pick subjects they can do well in and enjoy.",
   },
   "students:class-11-12": {
